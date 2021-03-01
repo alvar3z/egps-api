@@ -1,0 +1,225 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Documentacion Para api MELI",
+        "version": "1.0.0",
+        "title": "Swagger API MELI",
+        "contact": {
+            "author": "Fernando Alvarez",
+            "email": "fernando@alvar3z.net"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "topsecret",
+            "description": "Everything about your topsecret"
+        },
+        {
+            "name": "topsecret_split",
+            "description": "Access to Petstore topsecret_split"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/topsecret": {
+            "post": {
+                "tags": [
+                    "topsecret"
+                ],
+                "summary": "Add a new pet to the store",
+                "description": "",
+                "operationId": "addPet",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Lista de satelites",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/satellites"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operacion correcta",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Error , No hay Suficiente informacion",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "405": {
+                        "description": "Datos incorrectos"
+                    }
+                }
+            }
+        },
+        "/topsecret_split/{satellite_name}": {
+            "get": {
+                "tags": [
+                    "topsecret_split"
+                ],
+                "summary": "Buscar segun Nombre del satelite",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "satellite_name",
+                        "in": "path",
+                        "description": "nombre del satelite",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Error , No hay Suficiente informacion",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "topsecret_split"
+                ],
+                "summary": "Buscar segun Nombre del satelite",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "satellite_name",
+                        "in": "path",
+                        "description": "nombre del satelite",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "satellite_name",
+                        "in": "body",
+                        "description": "nombre del satelite",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/paramsSat"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Error , No hay Suficiente informacion",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "satellite": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "distance": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "position": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "satellites": {
+            "name": "satellites",
+            "type": "object",
+            "properties": {
+                "satellites": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/satellite"
+                    }
+                }
+            }
+        },
+        "paramsSat": {
+            "name": "paramsSat",
+            "type": "object",
+            "properties": {
+                "distance": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "response": {
+            "name": "response",
+            "properties": {
+                "position": {
+                    "$ref": "#/definitions/position"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "position": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}
